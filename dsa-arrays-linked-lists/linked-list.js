@@ -31,6 +31,7 @@ class Node {
 		// console.log("CREATING NODE:", val);
 		this.val = val;
 		this.next = null;
+		// this.previous = null;// no this is not a doubly linked list no previous
 	}
 }
 
@@ -44,7 +45,7 @@ class LinkedList {
 		this.length = 0;
 
 		for (let val of vals) this.push(val);
-		// console.log("Creation end, This: ", this);
+		console.log("Creation end, This: ", this);
 	}
 
 	/** push(val): add new value to end of list. */
@@ -75,24 +76,44 @@ class LinkedList {
 	/** unshift(val): add new value to start of list. */
 
 	unshift(val) {
-		console.log("UNSHIFTING:", val);
+		// console.log("UNSHIFTING:", val);
 		let newNode = new Node(val);
-		// this.head = newNode;
-		// newNode.next = oldListHead;
 		if (this.length == 0) {
-      this.head = newNode;
+			this.head = newNode;
 			this.tail = newNode;
 		} else {
-      newNode.next = this.head;
-      this.head = newNode
+			newNode.next = this.head;
+			this.head = newNode;
 		}
 		this.length++;
-		this.print();
 	}
 
 	/** pop(): return & remove last item. */
+  // LL = linkedList([5,10]) // head 5 tail 10 lengh 2
+	// pop() // 10     // head 5 tail null length 1
+  // we have to update the node that came before the tail aswell
+	pop() {
+		console.log("POPPING!");
+		let result;
+		if (this.length == 0) {
+      console.log("LinkedList is empty");
+      return result; 
+		} else if (this.length == 1) {
+			result = this.tail.val;
+			this.head = null;
+			this.tail = null;
+      return result;
 
-	// pop() {}
+		} else {
+			result = this.tail.val;
+			this.tail = null;
+
+		}
+		this.length--;
+    console.log("after nulling:", this);
+    console.log("Returning:", result);
+		return result;
+	}
 
 	/** shift(): return & remove first item. */
 
