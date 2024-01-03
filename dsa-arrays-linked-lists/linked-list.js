@@ -46,6 +46,7 @@ class LinkedList {
 
 		for (let val of vals) this.push(val);
 		// console.log("Creation end, This: ", this);
+		this.print();
 	}
 
 	/** push(val): add new value to end of list. */
@@ -178,19 +179,58 @@ class LinkedList {
 	/** setAt(idx, val): set val at idx to val */
 
 	setAt(idx, val) {
+		if (this.length == 0) {
+			console.log("list is empty");
+			return undefined;
+		} else if (idx < 0 || idx > this.length) {
+			console.log("requested idx is not valid (out of bounds)");
+			return undefined;
+		}
 		// traverse to the node at idx
 		let current = this.head;
 		for (let i = 0; i < idx; i++) {
 			current = current.next;
 		}
 		// set the value
-		current.val = val
-
+		current.val = val;
 	}
 
 	/** insertAt(idx, val): add node w/val before idx. */
 
-	// insertAt(idx, val) {}
+	insertAt(idx, val) {
+		if (this.length == 0 && idx != 0) {
+			console.error("list is empty");
+			return;
+			// throw new Error("Invalid index");
+		} else if (idx < 0 || idx > this.length) {
+			console.error("requested idx is not valid (out of bounds)");
+			return;
+			// throw new Error("Invalid index");
+		}
+
+		console.log(
+			`Adding node with val: ${val} at index ${idx} of linked list:`,
+			this
+		);
+
+		// traverse to the node before idx
+		let current = this.head;
+		for (let i = 0; i < idx - 1; i++) {
+			current = current.next;
+		}
+		console.log("Currently AT:", current);
+
+		let insertedNode = new Node(val);
+		insertedNode.next = current.next;
+		current.next = insertedNode;
+		if (idx === this.length ) {
+			// update the tail
+			this.tail = insertedNode;
+		  }
+		  
+		this.length++;
+		console.log("MUTATION RESULT:", this);
+	}
 
 	/** removeAt(idx): return & remove item at idx, */
 
