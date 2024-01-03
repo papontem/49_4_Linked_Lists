@@ -46,7 +46,7 @@ class LinkedList {
 
 		for (let val of vals) this.push(val);
 		// console.log("Creation end, This: ", this);
-		this.print();
+		// this.print();
 	}
 
 	/** push(val): add new value to end of list. */
@@ -198,6 +198,10 @@ class LinkedList {
 	/** insertAt(idx, val): add node w/val before idx. */
 
 	insertAt(idx, val) {
+		if (idx == 0) {
+			this.unshift(val);
+			return;
+		}
 		if (this.length == 0 && idx != 0) {
 			console.error("list is empty");
 			return;
@@ -208,37 +212,90 @@ class LinkedList {
 			// throw new Error("Invalid index");
 		}
 
-		console.log(
-			`Adding node with val: ${val} at index ${idx} of linked list:`,
-			this
-		);
+		// console.log(
+		// 	`Adding node with val: ${val} at index ${idx} of linked list:`,
+		// 	this
+		// );
 
 		// traverse to the node before idx
 		let current = this.head;
 		for (let i = 0; i < idx - 1; i++) {
 			current = current.next;
 		}
-		console.log("Currently AT:", current);
+		// console.log("Currently AT:", current);
 
 		let insertedNode = new Node(val);
 		insertedNode.next = current.next;
 		current.next = insertedNode;
-		if (idx === this.length ) {
+		if (idx === this.length) {
 			// update the tail
 			this.tail = insertedNode;
-		  }
-		  
+		}
+
 		this.length++;
-		console.log("MUTATION RESULT:", this);
+		// console.log("MUTATION RESULT:", this);
 	}
 
-	/** removeAt(idx): return & remove item at idx, */
+	/** removeAt(idx): return & remove item at idx */
 
-	// removeAt(idx) {}
+	removeAt(idx) {
+		if (this.length === 0) {
+			console.error("List is empty");
+			return;
+		} else if (idx < 0 || idx >= this.length) {
+			console.error("Requested index is not valid (out of bounds)");
+			return;
+		}
+
+		// console.log("REMOVING NODE AT IDX:", idx);
+
+		if (idx === 0) {
+			this.shift();
+			return;
+		} else {
+			// traverse to the node before idx
+			let current = this.head;
+			for (let i = 0; i < idx - 1; i++) {
+				current = current.next;
+			}
+
+			// console.log("Currently AT:", current);
+
+			// remove the node at idx
+			current.next = current.next.next;
+
+			// if the node at idx was the last node, update the tail
+			if (idx === this.length - 1) {
+				this.tail = current;
+			}
+		}
+
+		this.length--;
+		// console.log("MUTATION RESULT:", this);
+	}
 
 	/** average(): return an average of all values in the list */
 
-	// average() {}
+	average() {
+		let result;
+		// traverse to the node before idx
+		// for (let i = 0; i < this.length; i++) {
+		// 	current = current.next;
+		// }
+		let current = this.head;
+		if(current !== null){
+			result = 0
+		}else{
+			return 0
+		}
+		while (current !== null) {
+			result = result + current.val;
+
+			current = current.next;
+		}
+		result = result / this.length;
+		return result;
+	}
 
 	// DEMO CODE ------------------------------------------------------------
 	/** print(): traverses through and logs the entire list */
