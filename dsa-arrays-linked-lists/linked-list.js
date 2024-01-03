@@ -158,18 +158,35 @@ class LinkedList {
 	/** getAt(idx): get val at idx. */
 
 	getAt(idx) {
-		
-		let current= this.head
+		let result;
+		if (this.length == 0) {
+			console.log("list is empty");
+			return result;
+		} else if (idx < 0 || idx > this.length) {
+			console.log("requested idx is not valid (out of bounds)");
+			return result;
+		}
+		let current = this.head;
 		for (let i = 0; i < idx; i++) {
 			current = current.next;
 		}
-		console.log("RETURNING val at idx:", idx, " -> ", current.val);
-		return current.val;
+		// console.log("RETURNING val at idx:", idx, " -> ", current.val);
+		result = current.val;
+		return result;
 	}
 
 	/** setAt(idx, val): set val at idx to val */
 
-	// setAt(idx, val) {}
+	setAt(idx, val) {
+		// traverse to the node at idx
+		let current = this.head;
+		for (let i = 0; i < idx; i++) {
+			current = current.next;
+		}
+		// set the value
+		current.val = val
+
+	}
 
 	/** insertAt(idx, val): add node w/val before idx. */
 
