@@ -149,7 +149,7 @@ class LinkedList {
 			let oldHead = this.head;
 			let newHead = oldHead.next;
 			this.head = newHead;
-			result = oldHead.val
+			result = oldHead.val;
 		}
 		this.length--;
 		return result;
@@ -157,7 +157,15 @@ class LinkedList {
 
 	/** getAt(idx): get val at idx. */
 
-	// getAt(idx) {}
+	getAt(idx) {
+		
+		let current= this.head
+		for (let i = 0; i < idx; i++) {
+			current = current.next;
+		}
+		console.log("RETURNING val at idx:", idx, " -> ", current.val);
+		return current.val;
+	}
 
 	/** setAt(idx, val): set val at idx to val */
 
