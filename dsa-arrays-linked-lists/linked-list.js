@@ -45,7 +45,7 @@ class LinkedList {
 		this.length = 0;
 
 		for (let val of vals) this.push(val);
-		console.log("Creation end, This: ", this);
+		// console.log("Creation end, This: ", this);
 	}
 
 	/** push(val): add new value to end of list. */
@@ -93,47 +93,67 @@ class LinkedList {
 	// pop() // 10     // head 5 tail null length 1 // head node should now not have 10 as its tail
 	// we have to update the node that came before the tail aswell
 	pop() {
-		console.log("POPPING! --------------------------------");
+		// console.log("POPPING! --------------------------------");
 		let result;
-    
+
 		if (this.length == 0) {
-			console.log("LinkedList is empty");
+			// console.log("LinkedList is empty");
 			return result;
 		} else if (this.length == 1) {
 			result = this.tail.val;
 			this.head = null;
 			this.tail = null;
-      this.length --;
+			this.length--;
 			return result;
 		} else {
 			let current = this.head;
 
-      // this loop will getus to the tail of the node linked list
-      // while (current !== null) {
-      //   console.log(current.val);
-      //   current = current.next;
-      // }
-      // when this while loop ends we will get the value of current set to be the node just before the tail
+			// this loop will getus to the tail of the node linked list
+			// while (current !== null) {
+			//   console.log(current.val);
+			//   current = current.next;
+			// }
+			// when this while loop ends we will get the value of current set to be the node just before the tail
 			while (current.next !== this.tail) {
-				console.log("Current Val:", current.val);
+				// console.log("Current Val:", current.val);
 				current = current.next;
 			}
 
-			console.log("Current Node after Loop traversal:", current);
+			// console.log("Current Node after Loop traversal:", current);
 
 			result = current.next.val;
 			current.next = null;
 			this.tail = current;
 		}
 		this.length--;
-		console.log("after nulling:", this);
-		console.log("Returning:", result);
+		// console.log("after nulling:", this);
+		// console.log("Returning:", result);
 		return result;
 	}
 
 	/** shift(): return & remove first item. */
 
-	// shift() {}
+	shift() {
+		let result;
+		if (this.length == 0) {
+			// console.log("LinkedList is empty");
+			return result;
+		} else if (this.length == 1) {
+			result = this.head.val;
+
+			this.head = null;
+			this.tail = null;
+			this.length--;
+			return result;
+		} else {
+			let oldHead = this.head;
+			let newHead = oldHead.next;
+			this.head = newHead;
+			result = oldHead.val
+		}
+		this.length--;
+		return result;
+	}
 
 	/** getAt(idx): get val at idx. */
 
