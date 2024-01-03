@@ -28,7 +28,7 @@
  */
 class Node {
 	constructor(val) {
-		console.log("CREATING NODE:", val);
+		// console.log("CREATING NODE:", val);
 		this.val = val;
 		this.next = null;
 	}
@@ -38,13 +38,13 @@ class Node {
 
 class LinkedList {
 	constructor(vals = []) {
-		console.log("Creating Linked List:", vals);
+		// console.log("Creating Linked List:", vals);
 		this.head = null;
 		this.tail = null;
 		this.length = 0;
 
 		for (let val of vals) this.push(val);
-		console.log("Creation end, This: ", this);
+		// console.log("Creation end, This: ", this);
 	}
 
 	/** push(val): add new value to end of list. */
@@ -54,53 +54,74 @@ class LinkedList {
 	// push(15)
 	// LL
 	push(val) {
-		console.log("PUSHING:", val);
+		// console.log("PUSHING:", val);
 		let newNode = new Node(val);
 		if (this.length == 0) {
 			this.head = newNode;
 			this.tail = newNode;
 		} else {
 			this.tail.next = newNode;
-			this.tail = this.tail.next;
+			this.tail = newNode;
 		}
 		this.length++;
+		// DEMO CODE --------------- colts way...
+		//   let newNode = new Node(val);
+		//   if (this.head === null) this.head = newNode;
+		//   if (this.tail !== null) this.tail.next = newNode;
+		//   this.tail = newNode;
+		// DEMO CODE END --------------- colts way...
 	}
 
 	/** unshift(val): add new value to start of list. */
 
-	unshift(val) {}
+	unshift(val) {
+		console.log("UNSHIFTING:", val);
+		let newNode = new Node(val);
+		// this.head = newNode;
+		// newNode.next = oldListHead;
+		if (this.length == 0) {
+      this.head = newNode;
+			this.tail = newNode;
+		} else {
+      newNode.next = this.head;
+      this.head = newNode
+		}
+		this.length++;
+		this.print();
+	}
 
 	/** pop(): return & remove last item. */
 
-	pop() {}
+	// pop() {}
 
 	/** shift(): return & remove first item. */
 
-	shift() {}
+	// shift() {}
 
 	/** getAt(idx): get val at idx. */
 
-	getAt(idx) {}
+	// getAt(idx) {}
 
 	/** setAt(idx, val): set val at idx to val */
 
-	setAt(idx, val) {}
+	// setAt(idx, val) {}
 
 	/** insertAt(idx, val): add node w/val before idx. */
 
-	insertAt(idx, val) {}
+	// insertAt(idx, val) {}
 
 	/** removeAt(idx): return & remove item at idx, */
 
-	removeAt(idx) {}
+	// removeAt(idx) {}
 
 	/** average(): return an average of all values in the list */
 
-	average() {}
+	// average() {}
 
 	// DEMO CODE ------------------------------------------------------------
 	/** print(): traverses through and logs the entire list */
 	print() {
+		console.log("Current List:");
 		let current = this.head;
 
 		while (current !== null) {
