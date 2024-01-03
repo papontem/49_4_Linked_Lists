@@ -89,29 +89,45 @@ class LinkedList {
 	}
 
 	/** pop(): return & remove last item. */
-  // LL = linkedList([5,10]) // head 5 tail 10 lengh 2
-	// pop() // 10     // head 5 tail null length 1
-  // we have to update the node that came before the tail aswell
+	// LL = linkedList([5,10]) // head 5 tail 10 lengh 2
+	// pop() // 10     // head 5 tail null length 1 // head node should now not have 10 as its tail
+	// we have to update the node that came before the tail aswell
 	pop() {
-		console.log("POPPING!");
+		console.log("POPPING! --------------------------------");
 		let result;
+    
 		if (this.length == 0) {
-      console.log("LinkedList is empty");
-      return result; 
+			console.log("LinkedList is empty");
+			return result;
 		} else if (this.length == 1) {
 			result = this.tail.val;
 			this.head = null;
 			this.tail = null;
-      return result;
-
+      this.length --;
+			return result;
 		} else {
-			result = this.tail.val;
-			this.tail = null;
+			let current = this.head;
 
+      // this loop will getus to the tail of the node linked list
+      // while (current !== null) {
+      //   console.log(current.val);
+      //   current = current.next;
+      // }
+      // when this while loop ends we will get the value of current set to be the node just before the tail
+			while (current.next !== this.tail) {
+				console.log("Current Val:", current.val);
+				current = current.next;
+			}
+
+			console.log("Current Node after Loop traversal:", current);
+
+			result = current.next.val;
+			current.next = null;
+			this.tail = current;
 		}
 		this.length--;
-    console.log("after nulling:", this);
-    console.log("Returning:", result);
+		console.log("after nulling:", this);
+		console.log("Returning:", result);
 		return result;
 	}
 
